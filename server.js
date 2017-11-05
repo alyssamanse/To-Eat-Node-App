@@ -2,8 +2,8 @@ var express = require("express");
 var methodOverride = require("method-override");
 var bodyParser = require("body-parser");
 
-// delete this
-var connection = require("./config/connection.js");
+// Import routes and give the server access to them
+var burgerController = require("./controllers/burgers_controller.js");
 
 var port = 3000;
 
@@ -20,12 +20,8 @@ var exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-app.get("/index", function(request, response) {
-	connection.query("SELECT * FROM burgers", function(error, data) {
-		if (error) throw error;
+app.use(methodOverride("_method"));
 
-		response.render("index", {burgers: data});
-	})
-})
+app.use("/", burgerController);
 
 app.listen(port);
