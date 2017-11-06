@@ -1,6 +1,6 @@
 var connection = require("../config/connection.js");
 
-function printQuestionMarks(number) {
+/*function printQuestionMarks(number) {
   var array = [];
 
   for (var i = 0; i < number; i++) {
@@ -8,7 +8,7 @@ function printQuestionMarks(number) {
   }
 
   return array.toString();
-}
+}*/
 
 function objectToSql(object) {
   var array = [];
@@ -47,26 +47,26 @@ var orm = {
 		var queryString = "INSERT INTO ";
 		queryString += table;
 		queryString += " (";
-		queryString += column;
+		queryString += column.toString();
 		queryString += ") ";
-		queryString += "VALUES (";
+		queryString += "VALUES ('";
 		queryString += value;
-		queryString += ")";
+		queryString += "') ";
 
 		console.log(queryString);
 
-		connection.query(queryString, function(error, result) {
+		connection.query(queryString, value, function(error, result) {
 			if (error) throw error;
 
 			callback(result);
 		})
 	}, 
 
-	updateOne: function(table, column, boolean, condition, callback) {
+	updateOne: function(table, columnValues, condition, callback) {
 		var queryString = "UPDATE ";
 		queryString += table;
 		queryString += " SET ";
-		queryString += column + " = " + boolean;
+		queryString += objectToSql(columnValues);
 		queryString += " WHERE ";
 		queryString += condition;
 

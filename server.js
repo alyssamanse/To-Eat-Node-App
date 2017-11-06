@@ -4,6 +4,7 @@ var bodyParser = require("body-parser");
 
 // Import routes and give the server access to them
 var burgerController = require("./controllers/burgers_controller.js");
+var burger = require("./models/burger.js");
 
 var port = 3000;
 
@@ -22,6 +23,19 @@ app.set("view engine", "handlebars");
 
 app.use(methodOverride("_method"));
 
-app.use("/", burgerController);
+
+app.get("/", function(request, response) {
+	
+	burger.selectAll(function(data) {
+		var hbsObject = {
+			burgers: data
+		};
+
+		console.log(hbsObject);
+		response.render("index", hbsObject);
+	})
+})
+
+app.use("/api/burgers", burgerController);
 
 app.listen(port);
