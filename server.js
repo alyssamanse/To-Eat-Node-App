@@ -38,4 +38,4 @@ app.get("/", function(request, response) {
 
 app.use("/api/burgers", burgerController);
 
-app.listen(port);
+app.listen(process.env.PORT || 3000);
