@@ -1,7 +1,7 @@
 # To Eat Node Application
 
 ## Overview
-This Node.js application allows users to enter the name of a burger to be stored in a database. Once the burger has been eaten, the user can click the 'Devour' button to mark it as eaten. Eat all the burgers you can [here](https://burger-eating-app.herokuapp.com/).
+This Node.js application allows users to enter the name of a burger to be stored in a database. Once the burger has been eaten, the user can click the 'Devour' button to mark it as eaten. Eat all the fictional burgers you can [here](https://burger-eating-app.herokuapp.com/).
 
 ## Setup
 From the command line within the directory, 'npm install' to install:
